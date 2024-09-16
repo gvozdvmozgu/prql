@@ -2,7 +2,4 @@
 source: web/book/tests/documentation/book.rs
 expression: "from `artist tracks`\n"
 ---
-SELECT
-  *
-FROM
-  "artist tracks"
+SELECT * FROM "artist tracks"

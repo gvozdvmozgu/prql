@@ -10,6 +10,8 @@ mod pq;
 
 pub use dialect::{Dialect, SupportLevel};
 pub use pq::ast as pq_ast;
+use sqruff_lib::core::config::FluffConfig;
+use sqruff_lib::core::linter::core::Linter;
 
 use self::dialect::DialectHandler;
 use self::pq::ast::Cte;
@@ -28,13 +30,12 @@ pub fn compile(query: rq::RelationalQuery, options: &Options) -> Result<String> 
 
     // formatting
     let sql = if options.format {
-        let formatted = sqlformat::format(
-            &sql,
-            &sqlformat::QueryParams::default(),
-            sqlformat::FormatOptions::default(),
-        );
+        let config = FluffConfig::new(Default::default(), None, None);
+        let linter = Linter::new(config, None, None);
 
-        formatted + "\n"
+        linter
+            .lint_string(&sql, None, None, linter.get_rulepack().rules(), true)
+            .fix_string()
     } else {
         sql
     };

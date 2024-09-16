@@ -4,23 +4,19 @@ expression: "# glaredb:skip (May be a bag of String type conversion for Postgres
 input_file: prqlc/prqlc/tests/integration/queries/switch.prql
 ---
 WITH table_0 AS (
-  SELECT
-    CASE
-      WHEN composer IS NOT NULL THEN composer
-      WHEN genre_id < 17 THEN 'no composer'
-      ELSE 'unknown composer'
-    END AS display,
-    milliseconds
-  FROM
-    tracks
-  ORDER BY
-    milliseconds
-  LIMIT
-    10
+    SELECT
+        CASE
+            WHEN composer IS NOT NULL THEN composer WHEN
+                genre_id < 17
+                THEN 'no composer'
+            ELSE 'unknown composer'
+        END AS display,
+        milliseconds
+    FROM tracks
+    ORDER BY milliseconds
+    LIMIT 10
 )
-SELECT
-  display
-FROM
-  table_0
-ORDER BY
-  milliseconds
+
+SELECT display
+FROM table_0
+ORDER BY milliseconds

@@ -4,37 +4,28 @@ expression: "# clickhouse:skip (clickhouse doesn't have lag function)\n\n#! Calc
 input_file: prqlc/prqlc/tests/integration/queries/invoice_totals.prql
 ---
 WITH table_0 AS (
-  SELECT
-    i.billing_city AS city,
-    i.billing_address AS street,
-    COUNT(DISTINCT i.invoice_id) AS num_orders,
-    COALESCE(SUM(ii.quantity), 0) AS num_tracks
-  FROM
-    invoices AS i
+    SELECT
+        i.billing_city AS city,
+        i.billing_address AS street,
+        COUNT(DISTINCT i.invoice_id) AS num_orders,
+        COALESCE(SUM(ii.quantity), 0) AS num_tracks
+    FROM invoices AS i
     JOIN invoice_items AS ii ON i.invoice_id = ii.invoice_id
-  GROUP BY
-    i.billing_city,
-    i.billing_address
+    GROUP BY i.billing_city, i.billing_address
 )
+
 SELECT
-  city,
-  street,
-  num_orders,
-  num_tracks,
-  SUM(num_tracks) OVER (
-    PARTITION BY city
-    ORDER BY
-      street ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-  ) AS running_total_num_tracks,
-  LAG(num_tracks, 7) OVER (
-    ORDER BY
-      city,
-      street
-  ) AS num_tracks_last_week
-FROM
-  table_0
-ORDER BY
-  city,
-  street
-LIMIT
-  20
+    city,
+    street,
+    num_orders,
+    num_tracks,
+    SUM(num_tracks)
+        OVER (
+            PARTITION BY city
+            ORDER BY street ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        )
+        AS running_total_num_tracks,
+    LAG(num_tracks, 7) OVER (ORDER BY city, street) AS num_tracks_last_week
+FROM table_0
+ORDER BY city, street
+LIMIT 20

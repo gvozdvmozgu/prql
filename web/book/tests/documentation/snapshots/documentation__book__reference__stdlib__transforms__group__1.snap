@@ -2,11 +2,4 @@
 source: web/book/tests/documentation/book.rs
 expression: "from employees\nsort join_date\ntake 1\n"
 ---
-SELECT
-  *
-FROM
-  employees
-ORDER BY
-  join_date
-LIMIT
-  1
+SELECT * FROM employees ORDER BY join_date LIMIT 1

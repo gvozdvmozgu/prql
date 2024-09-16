@@ -2,9 +2,5 @@
 source: web/book/tests/documentation/book.rs
 expression: "prql target:sql.bigquery\n\nfrom `project-foo.dataset.table`\njoin `project-bar.dataset.table` (==col_bax)\n"
 ---
-SELECT
-  `project-foo.dataset.table`.*,
-  `project-bar.dataset.table`.*
-FROM
-  `project-foo.dataset.table`
-  JOIN `project-bar.dataset.table` ON `project-foo.dataset.table`.col_bax = `project-bar.dataset.table`.col_bax
+SELECT `project-foo.dataset.table`.*, `project-bar.dataset.table`.*
+FROM `project-foo.dataset.table` JOIN `project-bar.dataset.table` ON `project-foo.dataset.table`.col_bax = `project-bar.dataset.table`.col_bax

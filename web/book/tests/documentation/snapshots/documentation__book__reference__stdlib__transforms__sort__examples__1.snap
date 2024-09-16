@@ -2,9 +2,4 @@
 source: web/book/tests/documentation/book.rs
 expression: "from employees\nsort {-age}\n"
 ---
-SELECT
-  *
-FROM
-  employees
-ORDER BY
-  age DESC
+SELECT * FROM employees ORDER BY age DESC

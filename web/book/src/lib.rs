@@ -262,10 +262,7 @@ this is an error
     <h4>SQL</h4>
 
     ```sql
-    SELECT
-      *
-    FROM
-      x
+    SELECT * FROM x
 
     ```
 

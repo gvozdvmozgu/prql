@@ -2,9 +2,5 @@
 source: web/book/tests/documentation/book.rs
 expression: "from employees\nfilter id == $1\n"
 ---
-SELECT
-  *
-FROM
-  employees
-WHERE
-  id = $1
+SELECT * FROM employees WHERE id =
+$1

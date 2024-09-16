@@ -4,32 +4,18 @@ expression: "# Compute the 3 longest songs for each genre and sort by genre\n# m
 input_file: prqlc/prqlc/tests/integration/queries/group_sort_limit_take.prql
 ---
 WITH table_1 AS (
-  SELECT
-    milliseconds,
-    genre_id,
-    ROW_NUMBER() OVER (
-      PARTITION BY genre_id
-      ORDER BY
-        milliseconds DESC
-    ) AS _expr_0
-  FROM
-    tracks
+    SELECT
+        milliseconds,
+        genre_id,
+        ROW_NUMBER()
+            OVER (PARTITION BY genre_id ORDER BY milliseconds DESC)
+            AS _expr_0
+    FROM tracks
 ),
-table_0 AS (
-  SELECT
-    milliseconds,
-    genre_id
-  FROM
-    table_1
-  WHERE
-    _expr_0 <= 3
-)
-SELECT
-  genres.name,
-  table_0.milliseconds
-FROM
-  table_0
-  JOIN genres ON table_0.genre_id = genres.genre_id
-ORDER BY
-  genres.name,
-  table_0.milliseconds DESC
+
+table_0 AS (SELECT milliseconds, genre_id FROM table_1 WHERE _expr_0 <= 3)
+
+SELECT genres.name, table_0.milliseconds
+FROM table_0
+JOIN genres ON table_0.genre_id = genres.genre_id
+ORDER BY genres.name, table_0.milliseconds DESC

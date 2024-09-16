@@ -2,10 +2,6 @@
 source: web/book/tests/documentation/book.rs
 expression: "from tracks\njoin side:left artists (\n  # This adds a `country` condition, as an alternative to filtering\n  artists.id==tracks.artist_id && artists.country=='UK'\n)\n"
 ---
-SELECT
-  tracks.*,
-  artists.*
-FROM
-  tracks
-  LEFT JOIN artists ON artists.id = tracks.artist_id
-  AND artists.country = 'UK'
+SELECT tracks.*, artists.*
+FROM tracks
+LEFT JOIN artists ON artists.id = tracks.artist_id AND artists.country = 'UK'
