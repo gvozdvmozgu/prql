@@ -2,4 +2,4 @@
 source: web/book/tests/documentation/book.rs
 expression: "from orders\nsort {-value, created_at}\ntake 101..110\n"
 ---
-SELECT * FROM orders ORDER BY value DESC, created_at LIMIT 10 OFFSET 100
+SELECT * FROM orders ORDER BY value DESC, created_at ASC LIMIT 10 OFFSET 100

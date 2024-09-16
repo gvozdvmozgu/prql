@@ -4,4 +4,7 @@ expression: "[\n  {a=2}      # No pipe from line break before & after this list 
 ---
 WITH table_0 AS (SELECT 2 AS a)
 
-SELECT a, 2 * a AS c FROM table_0
+SELECT
+    a,
+    2 * a AS c
+FROM table_0

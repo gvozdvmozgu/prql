@@ -2,7 +2,9 @@
 source: web/book/tests/documentation/book.rs
 expression: "from employees\nsort tenure\njoin locations (==employee_id)\n"
 ---
-SELECT employees.*, locations.*
+SELECT
+    employees.*,
+    locations.*
 FROM employees
-JOIN locations ON employees.employee_id = locations.employee_id
+INNER JOIN locations ON employees.employee_id = locations.employee_id
 ORDER BY employees.tenure

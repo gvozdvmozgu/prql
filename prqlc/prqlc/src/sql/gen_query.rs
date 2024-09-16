@@ -670,10 +670,15 @@ mod test {
 
         assert_snapshot!(sql_ast, @r###"
         WITH table_0 AS (
-            SELECT title, AVG(salary) AS _expr_0 FROM employees GROUP BY title, emp_no
+            SELECT
+                title,
+                AVG(salary) AS _expr_0
+            FROM employees GROUP BY title, emp_no
         )
 
-        SELECT title, AVG(_expr_0) AS avg_salary
+        SELECT
+            title,
+            AVG(_expr_0) AS avg_salary
         FROM table_0
         GROUP BY title
         "###);
@@ -700,10 +705,16 @@ mod test {
         let sql_ast = crate::tests::compile(query).unwrap();
 
         assert_snapshot!(sql_ast, @r###"
-        WITH table_0 AS (SELECT *, RANK() OVER () AS global_rank FROM employees
+        WITH table_0 AS (
+            SELECT
+                *,
+                RANK() OVER () AS global_rank
+            FROM employees
         )
 
-        SELECT *, RANK() OVER () AS rank
+        SELECT
+            *,
+            RANK() OVER () AS rank
         FROM table_0
         WHERE country = 'USA'
         "###);
@@ -718,7 +729,11 @@ mod test {
         "#;
 
         assert_snapshot!(crate::tests::compile(query).unwrap(), @r###"
-        WITH table_0 AS (SELECT *, AVG(bar) OVER () AS _expr_0 FROM tbl1
+        WITH table_0 AS (
+            SELECT
+                *,
+                AVG(bar) OVER () AS _expr_0
+            FROM tbl1
         )
 
         SELECT *

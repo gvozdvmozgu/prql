@@ -204,7 +204,10 @@ mod test {
         let prql = r#"from artists | select {name, id} | filter (id | in [1, 2, 3])"#;
         assert_snapshot!(
              prql_to_pl(prql).and_then(|x| pl_to_rq(x.as_str())).and_then(|x|rq_to_sql(x.as_str(), opts)).unwrap(), @r###"
-        SELECT name, id FROM artists WHERE id IN (1, 2, 3)
+        SELECT
+            name,
+            id
+        FROM artists WHERE id IN (1, 2, 3)
         "###);
     }
 

@@ -10,7 +10,7 @@ WITH table_0 AS (
         COUNT(DISTINCT i.invoice_id) AS num_orders,
         COALESCE(SUM(ii.quantity), 0) AS num_tracks
     FROM invoices AS i
-    JOIN invoice_items AS ii ON i.invoice_id = ii.invoice_id
+    INNER JOIN invoice_items AS ii ON i.invoice_id = ii.invoice_id
     GROUP BY i.billing_city, i.billing_address
 )
 

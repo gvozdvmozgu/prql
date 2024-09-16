@@ -4,7 +4,6 @@ expression: "from employees\nderive distance = case [\n  city == \"Calgary\" => 
 ---
 SELECT
     *,
-    CASE
-        WHEN city = 'Calgary' THEN 0 WHEN city = 'Edmonton' THEN 300 ELSE NULL
-    END AS distance
+    CASE WHEN city = 'Calgary' THEN 0 WHEN city = 'Edmonton' THEN 300 END
+        AS distance
 FROM employees

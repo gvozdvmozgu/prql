@@ -2,7 +2,11 @@
 source: web/book/tests/documentation/book.rs
 expression: "from employees\nfilter salary < (average salary)\n"
 ---
-WITH table_0 AS (SELECT *, AVG(salary) OVER () AS _expr_0 FROM employees
+WITH table_0 AS (
+    SELECT
+        *,
+        AVG(salary) OVER () AS _expr_0
+    FROM employees
 )
 
 SELECT *

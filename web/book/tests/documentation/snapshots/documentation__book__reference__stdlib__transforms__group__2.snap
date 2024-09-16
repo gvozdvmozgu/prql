@@ -4,7 +4,8 @@ expression: "from employees\ngroup role (\n  sort join_date  # taken from above\
 ---
 WITH table_0 AS (
     SELECT
-        *, ROW_NUMBER() OVER (PARTITION BY role ORDER BY join_date) AS _expr_0
+        *,
+        ROW_NUMBER() OVER (PARTITION BY role ORDER BY join_date) AS _expr_0
     FROM employees
 )
 

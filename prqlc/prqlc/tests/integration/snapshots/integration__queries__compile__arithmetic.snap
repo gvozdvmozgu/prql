@@ -4,13 +4,33 @@ expression: "# mssql:test\nfrom [\n    { id = 1, x_int =  13, x_float =  13.0, k
 input_file: prqlc/prqlc/tests/integration/queries/arithmetic.prql
 ---
 WITH table_0 AS (
-    SELECT 1 AS id, 13 AS x_int, 13.0 AS x_float, 5 AS k_int, 5.0 AS k_float
+    SELECT
+        1 AS id,
+        13 AS x_int,
+        13.0 AS x_float,
+        5 AS k_int,
+        5.0 AS k_float
     UNION ALL
-    SELECT 2 AS id, -13 AS x_int, -13.0 AS x_float, 5 AS k_int, 5.0 AS k_float
+    SELECT
+        2 AS id,
+        -13 AS x_int,
+        -13.0 AS x_float,
+        5 AS k_int,
+        5.0 AS k_float
     UNION ALL
-    SELECT 3 AS id, 13 AS x_int, 13.0 AS x_float, -5 AS k_int, -5.0 AS k_float
+    SELECT
+        3 AS id,
+        13 AS x_int,
+        13.0 AS x_float,
+        -5 AS k_int,
+        -5.0 AS k_float
     UNION ALL
-    SELECT 4 AS id, -13 AS x_int, -13.0 AS x_float, -5 AS k_int, -5.0 AS k_float
+    SELECT
+        4 AS id,
+        -13 AS x_int,
+        -13.0 AS x_float,
+        -5 AS k_int,
+        -5.0 AS k_float
 )
 
 SELECT

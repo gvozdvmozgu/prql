@@ -4,7 +4,8 @@ expression: "# youngest employee from each department\nfrom employees\ngroup dep
 ---
 WITH table_0 AS (
     SELECT
-        *, ROW_NUMBER() OVER (PARTITION BY department ORDER BY age) AS _expr_0
+        *,
+        ROW_NUMBER() OVER (PARTITION BY department ORDER BY age) AS _expr_0
     FROM employees
 )
 

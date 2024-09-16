@@ -2,4 +2,7 @@
 source: web/book/tests/documentation/book.rs
 expression: "from employees\nsort age\nderive {rnk = rank age}\n"
 ---
-SELECT *, RANK() OVER (ORDER BY age) AS rnk FROM employees ORDER BY age
+SELECT
+    *,
+    RANK() OVER (ORDER BY age) AS rnk
+FROM employees ORDER BY age

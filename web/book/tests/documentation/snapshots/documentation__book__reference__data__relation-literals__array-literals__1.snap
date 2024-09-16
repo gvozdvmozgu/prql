@@ -12,7 +12,9 @@ WITH table_0 AS (
 
 my_artists AS (SELECT artist FROM table_0)
 
-SELECT artists.artist_id, albums.title
+SELECT
+    artists.artist_id,
+    albums.title
 FROM artists
-JOIN my_artists ON artists.artist = my_artists.artist
-JOIN albums ON artists.artist_id = albums.artist_id
+INNER JOIN my_artists ON artists.artist = my_artists.artist
+INNER JOIN albums ON artists.artist_id = albums.artist_id

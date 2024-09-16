@@ -70,6 +70,7 @@ sqruff-lib = {git = "https://github.com/quarylabs/sqruff.git"}
 sqlparser = {version = "0.51.0", features = ["serde"]}
 strum = {version = "0.26.3", features = ["std", "derive"]}
 strum_macros = "0.26.4"
+ahash = "0.8.11"
 
 [build-dependencies]
 vergen-gitcl = {version = "1.0.0", features = ["build"]}

@@ -730,7 +730,10 @@ sort full
         )
         .unwrap();
         assert_snapshot!(String::from_utf8(result).unwrap().trim(), @r###"
-        WITH x AS (SELECT y, u FROM z)
+        WITH x AS (SELECT
+            y,
+            u
+        FROM z)
 
         SELECT y FROM x
         "###);

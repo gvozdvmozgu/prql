@@ -14,7 +14,10 @@ WITH table_0 AS (
     FROM tracks
 )
 
-SELECT genre_id, media_type_id, album_id
+SELECT
+    genre_id,
+    media_type_id,
+    album_id
 FROM table_0
 WHERE _expr_0 <= 1
-ORDER BY genre_id DESC, media_type_id
+ORDER BY genre_id DESC, media_type_id ASC

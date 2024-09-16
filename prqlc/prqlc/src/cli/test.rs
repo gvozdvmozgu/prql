@@ -165,7 +165,9 @@ from long_query
     exit_code: 0
     ----- stdout -----
     WITH table_2 AS (
-        SELECT title, COUNT(*) AS ct
+        SELECT
+            title,
+            COUNT(*) AS ct
         FROM employees
         WHERE gross_cost > 0
         GROUP BY title
@@ -174,14 +176,25 @@ from long_query
         LIMIT 20
     ),
 
-    table_1 AS (SELECT title, ct FROM table_2 WHERE ct > 200 ORDER BY ct LIMIT 20),
+    table_1 AS (SELECT
+        title,
+        ct
+    FROM table_2 WHERE ct > 200 ORDER BY ct LIMIT 20),
 
-    table_0 AS (SELECT title, ct FROM table_1 WHERE ct > 200 ORDER BY ct LIMIT 20),
+    table_0 AS (SELECT
+        title,
+        ct
+    FROM table_1 WHERE ct > 200 ORDER BY ct LIMIT 20),
 
-    long_query AS (SELECT title, ct FROM table_0 WHERE ct > 200 ORDER BY ct LIMIT 20
-    )
+    long_query AS (SELECT
+        title,
+        ct
+    FROM table_0 WHERE ct > 200 ORDER BY ct LIMIT 20)
 
-    SELECT title, ct FROM long_query ORDER BY ct
+    SELECT
+        title,
+        ct
+    FROM long_query ORDER BY ct
 
     ----- stderr -----
     "###);
@@ -207,18 +220,28 @@ fn compile_project() {
     exit_code: 0
     ----- stdout -----
     WITH table_1 AS (
-        SELECT 120 AS artist_id, DATE '2023-05-18' AS last_listen
+        SELECT
+            120 AS artist_id,
+            DATE '2023-05-18' AS last_listen
         UNION ALL
-        SELECT 7 AS artist_id, DATE '2023-05-16' AS last_listen
+        SELECT
+            7 AS artist_id,
+            DATE '2023-05-16' AS last_listen
     ),
 
-    favorite_artists AS (SELECT artist_id, last_listen FROM table_1),
+    favorite_artists AS (SELECT
+        artist_id,
+        last_listen
+    FROM table_1),
 
     table_0 AS (SELECT * FROM read_parquet('artists.parquet')),
 
     input AS (SELECT * FROM table_0)
 
-    SELECT favorite_artists.artist_id, favorite_artists.last_listen, input.*
+    SELECT
+        input.*,
+        favorite_artists.artist_id,
+        favorite_artists.last_listen
     FROM favorite_artists
     LEFT JOIN input ON favorite_artists.artist_id = input.artist_id
 
@@ -240,12 +263,18 @@ fn compile_project() {
     exit_code: 0
     ----- stdout -----
     WITH table_0 AS (
-        SELECT 120 AS artist_id, DATE '2023-05-18' AS last_listen
+        SELECT
+            120 AS artist_id,
+            DATE '2023-05-18' AS last_listen
         UNION ALL
-        SELECT 7 AS artist_id, DATE '2023-05-16' AS last_listen
+        SELECT
+            7 AS artist_id,
+            DATE '2023-05-16' AS last_listen
     )
 
-    SELECT artist_id, last_listen
+    SELECT
+        artist_id,
+        last_listen
     FROM table_0
 
     ----- stderr -----

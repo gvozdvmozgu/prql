@@ -3082,6 +3082,7 @@ dependencies = [
 name = "prqlc"
 version = "0.13.1"
 dependencies = [
+ "ahash 0.8.11",
  "anstream",
  "anyhow",
  "ariadne",

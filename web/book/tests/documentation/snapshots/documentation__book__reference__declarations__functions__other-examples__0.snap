@@ -12,6 +12,11 @@ WITH table_0 AS (
     FROM employees
 )
 
-SELECT first_name, last_name, hobby, adult, age_squared
+SELECT
+    first_name,
+    last_name,
+    hobby,
+    adult,
+    age_squared
 FROM table_0
 WHERE LOWER(last_name) LIKE CONCAT('a', '%') AND hobby IN ('PRQL', 'Rust')

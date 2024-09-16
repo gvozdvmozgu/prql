@@ -8,9 +8,10 @@ mod keywords;
 mod operators;
 mod pq;
 
+use ahash::AHashMap;
 pub use dialect::{Dialect, SupportLevel};
 pub use pq::ast as pq_ast;
-use sqruff_lib::core::config::FluffConfig;
+use sqruff_lib::core::config::{FluffConfig, Value};
 use sqruff_lib::core::linter::core::Linter;
 
 use self::dialect::DialectHandler;
@@ -30,7 +31,17 @@ pub fn compile(query: rq::RelationalQuery, options: &Options) -> Result<String> 
 
     // formatting
     let sql = if options.format {
-        let config = FluffConfig::new(Default::default(), None, None);
+        let config = FluffConfig::new(
+            AHashMap::from([(
+                "core".to_string(),
+                Value::Map(AHashMap::from([(
+                    "rules".to_string(),
+                    Value::String(Box::from("all")),
+                )])),
+            )]),
+            None,
+            None,
+        );
         let linter = Linter::new(config, None, None);
 
         linter
@@ -140,6 +151,6 @@ mod test {
     #[test]
     fn test_end_with_new_line() {
         let sql = compile("from a", &Options::default().no_signature()).unwrap();
-        assert_eq!(sql, "SELECT\n  *\nFROM\n  a\n")
+        assert_eq!(sql, "SELECT * FROM a\n")
     }
 }

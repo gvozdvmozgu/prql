@@ -4,10 +4,15 @@ expression: "from foo\nselect {\n  circumference = diameter * 3.14159,\n  area =
 ---
 WITH table_0 AS (
     SELECT
-        diameter * 3.14159 AS circumference, POW(diameter / 2, 2) AS area, color
+        color,
+        diameter * 3.14159 AS circumference,
+        POW(diameter / 2, 2) AS area
     FROM foo
 )
 
-SELECT circumference, area, color
+SELECT
+    circumference,
+    area,
+    color
 FROM table_0
 WHERE circumference > 10 AND color <> 'red'
